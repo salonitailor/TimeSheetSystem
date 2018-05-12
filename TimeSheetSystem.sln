@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheetBL", "TimeSheetBL\TimeSheetBL.csproj", "{0DCC9CAB-FD1A-493A-990E-7F29D3B57ED1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheetSystem", "TimeSheetSystem\TimeSheetSystem.csproj", "{EFD3428E-72AB-4139-B26E-5BA44C350D9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DCC9CAB-FD1A-493A-990E-7F29D3B57ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DCC9CAB-FD1A-493A-990E-7F29D3B57ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DCC9CAB-FD1A-493A-990E-7F29D3B57ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DCC9CAB-FD1A-493A-990E-7F29D3B57ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD3428E-72AB-4139-B26E-5BA44C350D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD3428E-72AB-4139-B26E-5BA44C350D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD3428E-72AB-4139-B26E-5BA44C350D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD3428E-72AB-4139-B26E-5BA44C350D9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41AFB2BC-1D56-4810-93E3-9ED0DC8E0D84}
+	EndGlobalSection
+EndGlobal
