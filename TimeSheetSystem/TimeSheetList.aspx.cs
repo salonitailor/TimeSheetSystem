@@ -17,9 +17,12 @@ namespace TimeSheetSystem
         {
             if (Session["user"] == null)
                 Response.Redirect("Login.aspx");
+
+            lblUserDetail1.Text = "Welcome " + Session["user"];
+
             if (!Page.IsPostBack)
             {
-                lblUserDetail1.Text = "Welcome " + Session["user"];
+                
 
                 IList<TimeSheet> timeSheets = timeEntry.GetTimeSheetByUserName(Session["user"].ToString());
 
