@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheetBL", "TimeSheetBL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheetSystem", "TimeSheetSystem\TimeSheetSystem.csproj", "{EFD3428E-72AB-4139-B26E-5BA44C350D9C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{9B92FC94-5D98-466E-91B1-76D406C97BBB}"
+	ProjectSection(SolutionItems) = preProject
+		Database\timesheetdb.bak = Database\timesheetdb.bak
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
