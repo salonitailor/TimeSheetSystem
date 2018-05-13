@@ -10,7 +10,7 @@
 namespace TimeSheetSystem {
     
     
-    public partial class TimeSheetList {
+    public partial class LineItem {
         
         /// <summary>
         /// form1 control.
@@ -22,30 +22,39 @@ namespace TimeSheetSystem {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lblUserDetail control.
+        /// lblUserDetail1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserDetail;
+        protected global::System.Web.UI.WebControls.Label lblUserDetail1;
         
         /// <summary>
-        /// btnLogOut control.
+        /// btnLogOut1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogOut;
+        protected global::System.Web.UI.WebControls.Button btnLogOut1;
         
         /// <summary>
-        /// gvTimeSheet control.
+        /// gvDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTimeSheet;
+        protected global::System.Web.UI.WebControls.GridView gvDetails;
+        
+        /// <summary>
+        /// btnAddTimeSheet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddTimeSheet;
     }
 }

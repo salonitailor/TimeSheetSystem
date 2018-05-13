@@ -13,26 +13,30 @@ namespace TimeSheetSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblLoginInvalid.Visible = false;
+            if (!Page.IsPostBack)
+            {
+                lblLoginInvalid.Visible = false;
+
+            }
         }
 
-        protected void Button_Login_Click(object sender, EventArgs e)
+        protected void btnLogin_Click(object sender, EventArgs e)
         {
             LoginCheck login = new LoginCheck();
-            string user = TextBoxUserName.Text.Trim();
-            
-            if (login.IsValidLogin("", ""))
+            string user = txtUserName.Text.Trim();
+            string password = txtPassword.Text.Trim();
+            int userId = login.IsValidLogin(user, password);
+
+            if (userId != 0)
             {
                 Session["user"] = user;
+                Session["userid"] = userId;
                 Response.Redirect("TimeSheetList.aspx");
             }
             else
             {
                 lblLoginInvalid.Visible = true;
-
-
             }
-
         }
     }
 }

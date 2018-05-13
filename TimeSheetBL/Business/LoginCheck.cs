@@ -8,21 +8,22 @@ using TimeSheetBL.DataEntity;
 
 namespace TimeSheetSystem
 {
+    [Serializable]
     public class LoginCheck
     {
         TimeSheetDB dB = new TimeSheetDB();
 
-        public bool IsValidLogin(string UserName, string Password)
+        public int IsValidLogin(string UserName, string Password)
         {
             User user = GetUserByName(UserName);
 
             if (user.Password == Password)
             {
-                return true;
+                return user.Id;
             }
             else
             {
-                return false;
+                return 0;
             }
         }
 

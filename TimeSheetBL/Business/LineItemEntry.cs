@@ -8,6 +8,7 @@ using TimeSheetBL.DataEntity;
 
 namespace TimeSheetBL.Business
 {
+    [Serializable]
     public class LineItemEntry
     {
         TimeSheetDB dB = new TimeSheetDB();

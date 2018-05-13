@@ -76,25 +76,23 @@
             <tr>
                 <td class="auto-style2">UserName&nbsp; </td>
                 <td class="auto-style3">
-                    <asp:TextBox ID="TextBoxUserName" runat="server" Width="180px" style="text-align: right"></asp:TextBox>
+                    <asp:TextBox ID="txtUserName" runat="server" Width="180px" ></asp:TextBox>
                 </td>
                 <td>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxUserName" ErrorMessage="Please Enter UserName" ForeColor="Red"></asp:RequiredFieldValidator>
-                </td>
+                    &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">Password</td>
                 <td class="auto-style3">
-                    <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password" Width="180px"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="180px"></asp:TextBox>
                 </td>
                 <td>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBoxPassword" ErrorMessage="Please Enter Password" ForeColor="Red"></asp:RequiredFieldValidator>
-                </td>
+                    &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style3">
-                    <asp:Button ID="Button_Login" runat="server" OnClick="Button_Login_Click" style="background-color: #0099FF" Text="Login" Width="191px" />
+                    <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" style="background-color: #0099FF" Text="Login" Width="191px" />
                 </td>
                 <td>&nbsp;</td>
             </tr>
