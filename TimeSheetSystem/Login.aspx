@@ -50,6 +50,21 @@
 
 
     </style>
+    <script language="javascript" type="text/javascript">
+        function validate() {
+            if (document.getElementById("<%=txtUserName.ClientID%>").value == "") {
+                alert("Please Enter User Name");
+                document.getElementById("<%=txtUserName.ClientID%>").focus();
+                return false;
+            }
+            if (document.getElementById("<%=txtPassword.ClientID%>").value == "") {
+                alert("Please Enter Password");
+                document.getElementById("<%=txtPassword.ClientID%>").focus();
+                return false;
+            }
+        }
+
+        </Script>
 
 </head>
 <body>
@@ -92,7 +107,7 @@
             <tr>
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style3">
-                    <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" style="background-color: #0099FF" Text="Login" Width="191px" />
+                    <asp:Button ID="btnLogin" runat="server" OnClientClick="return validate()" OnClick="btnLogin_Click" style="background-color: #0099FF" Text="Login" Width="191px" />
                 </td>
                 <td>&nbsp;</td>
             </tr>

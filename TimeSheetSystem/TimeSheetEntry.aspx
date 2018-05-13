@@ -36,19 +36,48 @@
 
         .auto-style5 {
             height: 24px;
-            width: 100px;
+            width: 117px;
         }
 
         .auto-style6 {
-            width: 100px;
+            width: 117px;
         }
 
         #form1 {
             text-align: right;
         }
     </style>
+    
 </head>
 <body>
+    <script language="javascript" type="text/javascript">
+        function validate() {
+            if (document.getElementById("<%=txtDescription.ClientID%>").value == "") {
+                alert("Please Enter Description");
+                document.getElementById("<%=txtDescription.ClientID%>").focus();
+                return false;
+            }
+            if (document.getElementById("<%=txtRate.ClientID%>").value == "") {
+                alert("Please Enter Rate");
+                document.getElementById("<%=txtRate.ClientID%>").focus();
+                return false;
+            }
+        }
+
+     </script>
+     
+    <script type="text/javascript">
+    function checkDate(sender, args) 
+            {
+                if (sender._selectedDate > new Date()) 
+                {
+                    alert("You cannot select future date!");
+                    sender._selectedDate = new Date();
+                    // set the date back to the current date
+                    sender._textbox.set_Value(sender._selectedDate.format(sender._format))
+                }
+            }
+    </script>
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="formclass">
@@ -81,10 +110,18 @@
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:TemplateField HeaderText="Date">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtTimeSheetDate" runat="server" TextMode="Date" Text='<%#Bind("TimeSheetDate")%>'></asp:TextBox>
-                        <ajaxToolkit:CalendarExtender ID="caltxtTimeSheetDate" runat="server" Enabled="true" Format="MM/dd/yyyy" PopupPosition="Right" TargetControlID="txtTimeSheetDate"/>
-                    </EditItemTemplate>
+                    <EditItemTemplate>                   
+
+
+                        <asp:TextBox ID="txtTimeSheetDate" runat="server" TextMode="Date"    Text='<%#Bind("TimeSheetDate")%>'></asp:TextBox>
+                       
+                        <ajaxToolkit:CalendarExtender ID="caltxtTimeSheetDate" runat="server" Enabled="true" Format="MM/dd/yyyy" PopupPosition="Right" OnClientDateSelectionChanged="checkDate" TargetControlID="txtTimeSheetDate"/>
+                          <asp:RequiredFieldValidator ID="DateRequiredValidator"
+                                                  ControlToValidate="txtTimeSheetDate"
+                                                  ErrorMessage="*"
+                                                  ValidationGroup="NameGroup" 
+                                                  runat ="server" />
+                        </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="lblTimeSheetDate" runat="server" Text='<%#Bind("TimeSheetDate")%>' ></asp:Label>
                     </ItemTemplate>
@@ -93,6 +130,15 @@
                 <asp:TemplateField HeaderText="WorkTime(In Minutes)">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtWorkTime" runat="server" Text='<%# Bind("WorkTime") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="WorkTimeRequiredValidator"
+                                                   ControlToValidate="txtWorkTime"
+                                                   ErrorMessage="*"
+                                                   ValidationGroup="NameGroup" 
+                                                   runat="server" />
+
+                        <asp:CompareValidator ID="CompareValidator1" runat="server" ValueToCompare="0" ControlToValidate="txtWorkTime" 
+
+                           ErrorMessage="Time>0" Operator="GreaterThan" Type="Integer"></asp:CompareValidator>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="lblWorkTime" runat="server" Text='<%# Bind("WorkTime") %>'></asp:Label>
@@ -126,7 +172,6 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-        <asp:ImageButton ID="ImageButton2" runat="server" Height="16px" />
 
         <table class="auto-style1">
             <tr>
@@ -136,8 +181,8 @@
             <tr>
                 <td class="auto-style5">Description </td>
                 <td class="auto-style4">
-                    <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
-                </td>
+                    <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" ></asp:TextBox>
+                &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style6">Rate</td>
@@ -146,7 +191,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style6">Total Time</td>
+                <td class="auto-style6">TotalTime(Hour)</td>
                 <td style="text-align: left">
                     <asp:TextBox ID="txtTotalTime" runat="server" Enabled="False"></asp:TextBox>
                 </td>
@@ -163,7 +208,7 @@
             </tr>
             <tr>
                 <td class="auto-style6">
-                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClientClick="return validate()" OnClick="btnSave_Click" />
                 </td>
                 <td style="text-align: left">&nbsp;<asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Cancel" />
                     &nbsp;&nbsp;

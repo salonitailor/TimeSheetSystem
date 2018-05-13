@@ -17,9 +17,10 @@ namespace TimeSheetSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             if (Session["user"] == null)
                 Response.Redirect("Login.aspx");
-
+           
             if (!Page.IsPostBack)
             {
                 if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
@@ -108,7 +109,7 @@ namespace TimeSheetSystem
             {
                 TotalTime += lineitem.WorkTime;
             }
-            txtTotalTime.Text = (TotalTime / 60).ToString();
+            txtTotalTime.Text = (TotalTime / 60).ToString("0.00");
         }
 
         protected void gvTimeSheet_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -141,7 +142,7 @@ namespace TimeSheetSystem
 
             totalcost = totaltime * rate;
 
-            txtTotalCost.Text = totalcost.ToString();
+            txtTotalCost.Text = totalcost.ToString("0.00");
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
