@@ -17,7 +17,7 @@ namespace TimeSheetSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            
             if (Session["user"] == null)
                 Response.Redirect("Login.aspx");
            
@@ -25,13 +25,14 @@ namespace TimeSheetSystem
             {
                 if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
                 {
+                    lblUserDetail.Text = "Welcome " + Session["user"];
                     int id = int.Parse(Request.QueryString["id"].ToString());
                     timeSheet = timeEntry.GetTimeSheetById(id);
                     ViewState.Add("TimeSheet", timeSheet);
 
                     gvTimeSheet.DataSource = timeSheet.TimeSheetLineItem;
                     gvTimeSheet.DataBind();
-
+                   
                     txtDescription.Text = timeSheet.Description;
                     txtDescription.Enabled = false;
                     txtRate.Text = timeSheet.Rate.ToString();
@@ -53,6 +54,7 @@ namespace TimeSheetSystem
                     gvTimeSheet.EditIndex = timeSheet.TimeSheetLineItem.Count - 1;
 
                     ViewState.Add("TimeSheet", timeSheet);
+                    
 
                     gvTimeSheet.DataSource = timeSheet.TimeSheetLineItem;
                     gvTimeSheet.DataBind();
@@ -70,35 +72,41 @@ namespace TimeSheetSystem
             Response.Redirect("Login.aspx");
         }
 
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("TimeSheetList.aspx");
-        }
+       
 
+        
         protected void gvTimeSheet_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             TimeSheet ts = (TimeSheet)ViewState["TimeSheet"];
             var dt = e.NewValues[0];
             var worktime = e.NewValues[1];
 
-            ts.TimeSheetLineItem.ToList()[e.RowIndex].TimeSheetDate = DateTime.Parse(dt.ToString());
-            ts.TimeSheetLineItem.ToList()[e.RowIndex].WorkTime = int.Parse(worktime.ToString());
+            try
+            {
+                ts.TimeSheetLineItem.ToList()[e.RowIndex].TimeSheetDate = DateTime.Parse(dt.ToString());
+                ts.TimeSheetLineItem.ToList()[e.RowIndex].WorkTime = int.Parse(worktime.ToString());
 
-            TimeSheetLineItem timeSheetLineItem = new TimeSheetLineItem();
+                TimeSheetLineItem timeSheetLineItem = new TimeSheetLineItem();
 
-            ts.TimeSheetLineItem.Add(timeSheetLineItem);
+                ts.TimeSheetLineItem.Add(timeSheetLineItem);
 
-            gvTimeSheet.EditIndex = ts.TimeSheetLineItem.Count - 1;
+                gvTimeSheet.EditIndex = ts.TimeSheetLineItem.Count - 1;
 
-            ViewState.Add("TimeSheet", ts);
+                ViewState.Add("TimeSheet", ts);
 
-            CalculateTime(ts.TimeSheetLineItem.ToList());
+                CalculateTime(ts.TimeSheetLineItem.ToList());
 
-            gvTimeSheet.DataSource = ts.TimeSheetLineItem;
-            gvTimeSheet.DataBind();
+                gvTimeSheet.DataSource = ts.TimeSheetLineItem;
+                gvTimeSheet.DataBind();
 
-            ((TextBox)gvTimeSheet.Rows[ts.TimeSheetLineItem.Count - 1].FindControl("txtTimeSheetDate")).Text = "";
-            ((TextBox)gvTimeSheet.Rows[ts.TimeSheetLineItem.Count - 1].FindControl("txtWorkTime")).Text = "";
+                ((TextBox)gvTimeSheet.Rows[ts.TimeSheetLineItem.Count - 1].FindControl("txtTimeSheetDate")).Text = "";
+                ((TextBox)gvTimeSheet.Rows[ts.TimeSheetLineItem.Count - 1].FindControl("txtWorkTime")).Text = "";
+            }
+            catch (Exception)
+            {
+                Response.Write("Invalid");
+            }
+
         }
 
         private void CalculateTime(IList<TimeSheetLineItem> lineItems)
@@ -134,29 +142,56 @@ namespace TimeSheetSystem
         {
             float rate;
             float totaltime;
-            float totalcost;
+            float totalcost;            
 
-            rate = float.Parse(txtRate.Text);
+           bool result = (txtRate.Text).All(Char.IsLetter);
 
-            totaltime = float.Parse(txtTotalTime.Text);
 
-            totalcost = totaltime * rate;
 
-            txtTotalCost.Text = totalcost.ToString("0.00");
+
+            if (result)
+            {
+                Response.Write("");
+
+            }
+            else
+            {
+
+                rate = float.Parse(txtRate.Text);
+
+                totaltime = float.Parse(txtTotalTime.Text);
+                totalcost = totaltime * rate;
+                txtTotalCost.Text = totalcost.ToString("0.00");
+            }
+
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             TimeSheet ts = (TimeSheet)ViewState["TimeSheet"];
 
-            ts.Rate = float.Parse(txtRate.Text);
-            ts.Description = txtDescription.Text;
-            ts.Cost = float.Parse(txtTotalCost.Text);
-            ts.LastUpdateDate = DateTime.Now;
-            ts.UserID = Session["user"].ToString();
+            try
+            {
+                ts.Rate = float.Parse(txtRate.Text);
+                ts.Description = txtDescription.Text;
+                ts.Cost = float.Parse(txtTotalCost.Text);
+                ts.LastUpdateDate = DateTime.Now;
+                ts.UserID = Session["user"].ToString();
 
-            timeEntry.InsertTimeSheet(ts);
+                timeEntry.InsertTimeSheet(ts);
 
+                Response.Redirect("TimeSheetList.aspx");
+            }
+            catch (Exception)
+            {
+                Response.Write("xgg");
+
+            }
+            
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
             Response.Redirect("TimeSheetList.aspx");
         }
     }

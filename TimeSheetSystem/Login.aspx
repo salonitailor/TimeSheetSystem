@@ -10,11 +10,11 @@
             width: 100%;
         }
         .auto-style2 {
-            width: 291px;
+            width: 566px;
             text-align: right;
         }
         .auto-style3 {
-            width: 241px;
+            width: 625px;
         }
         .auto-style5 {
             color: #FFFFFF;
@@ -25,13 +25,13 @@
             color: #336699;
         }
         .auto-style7 {
-            width: 241px;
+            width: 625px;
             font-size: x-large;
-            text-align: center;
+            text-align: left;
             color: #336699;
         }
         .auto-style8 {
-            width: 291px;
+            width: 566px;
             text-align: center;
             font-size: x-large;
             color: #336699;

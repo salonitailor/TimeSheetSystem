@@ -19,11 +19,15 @@
             width: 100%;
         }
     </style>
+    <style type="text/css">
+    .CenteredGrid { width:640px; margin-left:auto; margin-right:auto; }
+    </style>
+
 </head>
 <body>
     <form id="form1" runat="server">
         <div style="text-align: center; font-size: x-large; color: #FFFFFF; background-color: #336699">
-            &nbsp;Time Sheet Details
+            Time Sheet Details
         </div>
         <table class="auto-style1">
             <tr>
@@ -36,7 +40,8 @@
                 </td>
             </tr>
         </table>
-        <asp:GridView ID="gvDetails" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="gvDetails" runat="server" AutoGenerateColumns="False" CellPadding="4" CssClass="CenteredGrid" ForeColor="#333333"  GridLines="None">
+            <RowStyle HorizontalAlign="left" />
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:TemplateField HeaderText="Description">
@@ -83,10 +88,16 @@
             <SortedAscendingHeaderStyle BackColor="#506C8C" />
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-        </asp:GridView>
-        <p>
-            <asp:Button ID="btnAddTimeSheet" runat="server" OnClick="btnAddTimeSheet_Click" Text="Add New TimeSheet" />
-        </p>
+        </asp:GridView>        
+                   <table class="auto-style1">
+                <tr>
+                    <td style="text-align: center">            
+            <asp:Button ID="btnAddTimeSheet0"  runat="server"  OnClick="btnAddTimeSheet_Click" Text="Add New TimeSheet" />
+
+                    </td>
+                </tr>
+            </table>
+       
     </form>
 </body>
 </html>

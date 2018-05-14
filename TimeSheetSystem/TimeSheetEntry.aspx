@@ -50,7 +50,7 @@
     
 </head>
 <body>
-    <script language="javascript" type="text/javascript">
+    <script type="text/javascript">
         function validate() {
             if (document.getElementById("<%=txtDescription.ClientID%>").value == "") {
                 alert("Please Enter Description");
@@ -62,8 +62,13 @@
                 document.getElementById("<%=txtRate.ClientID%>").focus();
                 return false;
             }
+
+             if(parseInt(document.getElementById("<%=txtRate.ClientID%>").value) <= 0)
+              
+                alert('Please Enter positive Integer');
         }
 
+       
      </script>
      
     <script type="text/javascript">
@@ -75,8 +80,11 @@
                     sender._selectedDate = new Date();
                     // set the date back to the current date
                     sender._textbox.set_Value(sender._selectedDate.format(sender._format))
+                                    
                 }
-            }
+        }
+                     
+
     </script>
     <form runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -116,10 +124,10 @@
                         <asp:TextBox ID="txtTimeSheetDate" runat="server" TextMode="Date"    Text='<%#Bind("TimeSheetDate")%>'></asp:TextBox>
                        
                         <ajaxToolkit:CalendarExtender ID="caltxtTimeSheetDate" runat="server" Enabled="true" Format="MM/dd/yyyy" PopupPosition="Right" OnClientDateSelectionChanged="checkDate" TargetControlID="txtTimeSheetDate"/>
-                          <asp:RequiredFieldValidator ID="DateRequiredValidator"
+                          <asp:RequiredFieldValidator ID="DateRequiredValidator" ForeColor="Red"
                                                   ControlToValidate="txtTimeSheetDate"
-                                                  ErrorMessage="*"
-                                                  ValidationGroup="NameGroup" 
+                                                  ErrorMessage="Required Field" 
+                              validationgroup="PersonalInfoGroup"
                                                   runat ="server" />
                         </EditItemTemplate>
                     <ItemTemplate>
@@ -127,28 +135,27 @@
                     </ItemTemplate>
  
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="WorkTime(In Minutes)">
+                <asp:TemplateField HeaderText="WorkTime(In Minutes)"  HeaderStyle-HorizontalAlign="Left">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtWorkTime" runat="server" Text='<%# Bind("WorkTime") %>'></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="WorkTimeRequiredValidator"
+                        <asp:TextBox ID="txtWorkTime" style="text-align: right" runat="server" Text='<%# Bind("WorkTime") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="WorkTimeRequiredValidator" ForeColor="Red"
                                                    ControlToValidate="txtWorkTime"
-                                                   ErrorMessage="*"
-                                                   ValidationGroup="NameGroup" 
+                                                   ErrorMessage="Required Field" 
+                                                   validationgroup="PersonalInfoGroup"
                                                    runat="server" />
 
-                        <asp:CompareValidator ID="CompareValidator1" runat="server" ValueToCompare="0" ControlToValidate="txtWorkTime" 
+                        <asp:CompareValidator ID="CompareValidator1"   validationgroup="PersonalInfoGroup" ForeColor="Red" runat="server" ValueToCompare="0" ControlToValidate="txtWorkTime" 
 
-                           ErrorMessage="Time>0" Operator="GreaterThan" Type="Integer"></asp:CompareValidator>
+                           ErrorMessage="Enter Positive Integer"  Operator="GreaterThan" Type="Integer"></asp:CompareValidator>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblWorkTime" runat="server" Text='<%# Bind("WorkTime") %>'></asp:Label>
+                        <asp:Label ID="lblWorkTime"  runat="server" Text='<%# Bind("WorkTime") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 
                 <asp:TemplateField>
                     <EditItemTemplate>
-                        <asp:Button ID="btnSave" CommandName="Update" runat="server" Text="Save"  />
-                        <asp:Button ID="btnCancel" CommandName="Cancel" runat="server" Text="Cancel"  />
+                        <asp:Button ID="btnSave" CommandName="Update" runat="server" validationgroup="PersonalInfoGroup" Text="Save"  />                        
                     </EditItemTemplate>
                     <ItemTemplate>
                         
@@ -188,6 +195,9 @@
                 <td class="auto-style6">Rate</td>
                 <td style="text-align: left">
                     <asp:TextBox ID="txtRate" runat="server" AutoPostBack="True" OnTextChanged="TextBoxRate_TextChanged"></asp:TextBox>
+                    <asp:CompareValidator ID="CompareValidator2" runat="server" ValueToCompare="0" ControlToValidate="txtRate" 
+
+                           ErrorMessage="Please Enter Positive Integer" Operator="GreaterThan" Type="Integer"></asp:CompareValidator>
                 </td>
             </tr>
             <tr>
